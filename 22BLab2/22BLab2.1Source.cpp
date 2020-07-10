@@ -3,13 +3,12 @@ Yi Jou (Ruby) Liao
 Summer 2020
 Lab 2
 Problem 2.1.0
-Description of problem:
-
+Description of problem: 
+	A Unit Load Delivery (ULD) setup and tracking program using a struct to store cargo data. (V1)
 */
 
 #include <iostream>
 #include <string>
-#include <iomanip>
 using namespace std;
 
 // Structure declaration
@@ -26,18 +25,12 @@ struct Unit {
 void input(Unit* uPtr);
 void output(Unit* uPtr);
 
-
 int main() {
-	/*
-	* Uses new to obtain space for the data structure
-	* Calls the other two functions
-	* Deletes the space obtained using new
-	*/
 
 	Unit* uPtr;			// Define Unit pointer
 	uPtr = new Unit;	// Obtain space for data structure
 
-	cout << " ~ Itty Bitty Airfreight Unit Load Delivery Tracker ~ ";
+	cout << " ~ Itty Bitty Airfreight Unit Load Delivery Tracker V1 ~ ";
 
 	input(uPtr);		// Call input to get data
 	output(uPtr);		// Call output to print data
@@ -53,8 +46,8 @@ int main() {
 void input(Unit* uPtr) {
 
 	// Local variables
-	string uldType;				// Container or Pallet
-	string abbrev;	// Container type (AYF, AYK, AAA, AYY) or Pallet type (PAG, PMC, PLA)
+	string uldType;			// Container or Pallet
+	string abbrev;			// Container type (AYF, AYK, AAA, AYY) or Pallet type (PAG, PMC, PLA)
 	string uldID;			// Container/Pallet type + 5 digit code + airline code
 	int aircraft;			// aircraft type (numerical model)
 	int weight;				// weight, in pounds, of loaded container or pallet
@@ -137,22 +130,21 @@ void input(Unit* uPtr) {
 		cout << "\n\nEnter 5 digit unit ID: ";
 		cin >> input;
 	}
-	uldid = abbrev + input + "IB";
-	cout << " * Unit ID is '" + uldID + "'.";
+	uldID = input + "IB";
+	cout << " * Unit ID is '" + abbrev + uldID + "'.";
 
 	// Assign aircraft
 	cout << "\n\nEnter aircraft model: ";
 	cin >> aircraft;
-	//getline(cin, aircraft);
-	cout << " * Aircraft model is '" + aircraft + "'.";
+	cout << " * Aircraft model is '" << aircraft << "'.";
 
 	// Assign weight
 	cout << "\n\nEnter cargo weight: ";
 	cin >> weight;
-	cout << " * Cargo weight is " + weight + " lbs.";
+	cout << " * Cargo weight is " << weight << " lbs.";
 
 	// Assign destination
-	cout << "\n\nEnter 3 alpha IATA destination (ex. 'SFO'): ";
+	cout << "\n\nEnter 3-alpha IATA destination (ex. 'SFO'): ";
 	cin >> destination;
 	cout << " * Cargo destination is '" + destination + "'.";
 
@@ -163,7 +155,6 @@ void input(Unit* uPtr) {
 	uPtr->aircraft = aircraft;
 	uPtr->weight = weight;
 	uPtr->destination = destination;
-
 }
 
 /**
@@ -171,10 +162,10 @@ void input(Unit* uPtr) {
 	@param *uPtr Structure pointer to Unit structure
 */
 void output(Unit* uPtr) {
-	cout << "\n\n ~ Cargo ID " + uPtr->uldID + " ~ " << endl;
-	cout << " * Cargo: " + uPtr->uldType + "\n";
-	cout << " * " + uPtr->uldType + " Type: " + uPtr->uldType + "\n";
-	cout << " * Aircraft: " + uPtr->aircraft + "\n";
-	cout << " * Weight: " + uPtr->weight + "\n";
-	cout << " * Destination: " + uPtr->destination + "\n";
+	cout << "\n\nCargo ID " << uPtr->abbrev << uPtr->uldID << ":" << endl;
+	cout << " * Cargo: " << uPtr->uldType << endl;
+	cout << " * " << uPtr->uldType << " Type: " << uPtr->abbrev << endl;
+	cout << " * Aircraft: " << uPtr->aircraft << endl;
+	cout << " * Weight: " << uPtr->weight << endl;
+	cout << " * Destination: " << uPtr->destination << endl;
 }
