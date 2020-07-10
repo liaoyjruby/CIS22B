@@ -44,10 +44,10 @@ public:
 };
 
 int main() {
-	
+
 	cout << " ~ Itty Bitty Airfreight Unit Load Delivery Tracker ~ ";
 
-	Unit *uPtr = new Unit;
+	Unit* uPtr = new Unit;
 	uPtr->input(*uPtr);
 	uPtr->output(*uPtr);
 	delete uPtr;
