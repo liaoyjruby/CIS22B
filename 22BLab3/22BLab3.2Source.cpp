@@ -2,9 +2,9 @@
 Yi Jou (Ruby) Liao
 Summer 2020
 Lab 3
-Problem 3.1.0
+Problem 3.2.0
 Description of problem:
-	A friend function is incorporated to the Unit Load Delivery (ULD) program to convert kilograms to pound.
+	A copy constructor is incorporated to the Unit Load Delivery (ULD) program.
 */
 
 #include <iostream>
@@ -23,6 +23,7 @@ private:
 public:
 	Unit();		// Default constructor
 	Unit(string uldType, string abbrev, string uldID, int aircraft, double weight, string destination);	// Full constructor
+	Unit(const Unit &cargo); //Copy constructor
 	~Unit();	// Destructor
 	// Mutator (setters)
 	void setUldType(string);
@@ -46,11 +47,17 @@ public:
 double kgToLb(double &); // kgToLb() prototype
 
 int main() {
-	cout << " ~ Itty Bitty Airfreight Unit Load Delivery Tracker V3.1 ~ ";
-	Unit cargo; // Object created in stack (not heap)
-	cargo.input(cargo);
-	cargo.output(cargo);
-	//delete uPtr; // Unit pointer removed, destructor called.
+	cout << " ~ Itty Bitty Airfreight Unit Load Delivery Tracker v3.2 ~ ";
+	Unit cargo1; // Object created in stack (not heap)
+	cargo1.input(cargo1);
+
+	Unit cargo2 = Unit(cargo1); // Copy contents of cargo1
+
+	// Output original (cargo1) and its copy (cargo2)
+	cout << "\n\n ~ Original (cargo1) output ~ ";
+	cargo1.output(cargo1);
+	cout << "\n ~ Copy (cargo2) output ~ ";
+	cargo1.output(cargo2);
 
 	return 0;
 }
@@ -73,6 +80,16 @@ Unit::Unit(const string type, const string abrv, const string id, const int craf
 	aircraft = craft;
 	weight = wt;
 	destination = dest;
+}
+
+// Copy constructor
+Unit::Unit(const Unit &cargo){
+	uldType = cargo.uldType;
+	abbrev = cargo.abbrev;
+	uldID = cargo.uldID;
+	aircraft = cargo.aircraft;
+	weight = cargo.aircraft;
+	destination = cargo.destination;
 }
 
 // Destructor
@@ -159,10 +176,11 @@ void Unit::input(Unit&) {
 
 		cout << "\n\nContainer type:" << endl;
 		cout << " 1 AAA \n";
-		cout << " 2 AYF \n";
-		cout << " 3 AYK \n";
-		cout << " 4 AYY \n";
-		cout << "Enter '1','2','3', or '4': ";
+		cout << " 2 ABB \n";
+		cout << " 3 AYF \n";
+		cout << " 4 AYK \n";
+		cout << " 5 AYY \n";
+		cout << "Enter option number: ";
 		cin >> intInput;
 
 		switch (intInput) {
@@ -170,12 +188,15 @@ void Unit::input(Unit&) {
 			abbrev = "AAA";
 			break;
 		case 2:
-			abbrev = "AYF";
+			abbrev = "ABB";
 			break;
 		case 3:
-			abbrev = "AYK";
+			abbrev = "AYF";
 			break;
 		case 4:
+			abbrev = "AYK";
+			break;
+		case 5:
 			abbrev = "AYY";
 			break;
 		default:
