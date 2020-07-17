@@ -2,9 +2,10 @@
 Yi Jou (Ruby) Liao
 Summer 2020
 Lab 3
-Problem 3.2.0
+Problem 3.3.0
 Description of problem:
-	A copy constructor is incorporated to the Unit Load Delivery (ULD) program.
+	An overloaded == operator is incorporated to the Unit Load Delivery (ULD) program to compare if two objects are equal. 
+	Objects are equal if abbrev and uldID are the same.
 */
 
 #include <iostream>
@@ -43,21 +44,42 @@ public:
 	void input(Unit&);
 	void output(Unit&);
 	friend double kgToLb(double &); // Friend function for converting kilogram weight to pound
+	// Overloaded operator
+	friend bool operator==(const Unit &lhs, const Unit &rhs);
+
 };
 double kgToLb(double &); // kgToLb() prototype
+bool operator==(const Unit &lhs, const Unit &rhs); // Overloaded equality operator (==) prototype
 
 int main() {
-	cout << " ~ Itty Bitty Airfreight Unit Load Delivery Tracker v3.2 ~ ";
-	Unit cargo1; // Object created in stack (not heap)
+	cout << " ~ Itty Bitty Airfreight Unit Load Delivery Tracker v3.3 ~ ";
+	Unit cargo1;
 	cargo1.input(cargo1);
 
-	Unit cargo2 = Unit(cargo1); // Copy contents of cargo1 to cargo2
+	Unit cargo2 = Unit(cargo1); // Copy of cargo1
+	Unit cargo3; // Default Unit object
 
-	// Output original (cargo1) and its copy (cargo2)
+	// Compare original (cargo1) against its copy (cargo2)
+	if (cargo1 == cargo2){
+		cout << "\n\n * cargo1 is the same Unit as cargo2"; // Expected output
+	} else {
+		cout << "\n\n * cargo1 is not the same Unit as cargo2";
+	}
+
+	// Compare original (cargo1) against default Unit (cargo3)
+	if (cargo1 == cargo3){
+		cout << "\n\n * cargo1 is the same Unit as cargo3";
+	} else {
+		cout << "\n\n * cargo1 is not the same Unit as cargo3"; // Expected output
+	}
+
+	// Output Unit contents
 	cout << "\n\n ~ Original (cargo1) output ~ ";
 	cargo1.output(cargo1);
 	cout << "\n ~ Copy (cargo2) output ~ ";
-	cargo1.output(cargo2);
+	cargo2.output(cargo2);
+	cout << "\n ~ Default (cargo3) output ~ ";
+	cargo3.output(cargo3);
 
 	return 0;
 }
@@ -66,7 +88,7 @@ int main() {
 Unit::Unit() {
 	uldType = "[Type]";
 	abbrev = "XXX";
-	uldID = "xxxxxIB";
+	uldID = "XXX#####IB";
 	aircraft = 000;
 	weight = 0.0;
 	destination = "XXX";
@@ -275,7 +297,7 @@ void Unit::input(Unit&) {
 	@param Unit& Pointer to Unit structure
 */
 void Unit::output(Unit &) {
-	cout << "\n\nCargo ID " << abbrev << uldID << ":" << endl;
+	cout << "\n\nCargo ID " << uldID << ":" << endl;
 	cout << " * Cargo: " << uldType << endl;
 	cout << " * " << uldType << " type: " << abbrev << endl;
 	cout << " * Aircraft: " << aircraft << endl;
@@ -291,4 +313,14 @@ void Unit::output(Unit &) {
 double kgToLb(double &wt){
 	wt = wt * 2.2;
 	return wt;
+}
+
+/**
+	Overloaded equality operator for Unit objects. Equal if abbrev and uldID are the same.
+	@param &lhs Pointer to the left hand side object in comparison
+	@param &rhs Pointer to the right hand side object in comparison
+	@return bool; true if abbrev & uldID are the same the between two objects
+*/
+bool operator==(const Unit &lhs, const Unit &rhs){
+	return (lhs.getAbbrev() == rhs.getAbbrev() && lhs.getUldID() == rhs.getUldID());
 }
