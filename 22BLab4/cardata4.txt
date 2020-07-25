@@ -1,0 +1,3 @@
+Pallet     PAG    PAG45982IB   737    4978   OAK
+Container  AYF    AYF23409AA   737    2209   LAS
+Container  AAA    AAA89023DL   737    5932   DFW
