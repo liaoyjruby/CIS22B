@@ -110,7 +110,7 @@ Unit::Unit(const Unit &cargo){
 	abbrev = cargo.abbrev;
 	uldID = cargo.uldID;
 	aircraft = cargo.aircraft;
-	weight = cargo.aircraft;
+	weight = cargo.weight;
 	destination = cargo.destination;
 }
 
