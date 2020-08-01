@@ -2,7 +2,7 @@
 Yi Jou (Ruby) Liao
 Summer 2020
 Lab 5
-Problem 5.1.0
+Problem 5.1.1
 Description of problem:
 	Unit Load Delivery (ULD) program reads in data from a properly formatted text file and assigns data as cargo for either a 737 or 767 aircraft, following plane specifications.
 */
@@ -29,10 +29,10 @@ protected:
 	double weight;		// Weight, in pounds, of loaded container or pallet
 	string destination; // Three alpha character IATA string
 public:
-	Unit();																								// Default constructor
+	Unit();																																	// Default constructor
 	Unit(const string uldType, const string abbrev, const string uldID, const int aircraft, const double weight, const string destination); // Full constructor
-	Unit(const Unit &cargo);																			//Copy constructor
-	~Unit();																							// Destructor
+	Unit(const Unit &cargo);																												//Copy constructor
+	~Unit();																																// Destructor
 	// Mutator (setters)
 	void setUldType(string);
 	void setAbbrev(string);
@@ -260,23 +260,19 @@ void load737(vector<Boeing737> &vect737, const string uldType, const string abbr
 		}
 		else
 		{
-			if (DEBUG)
-				cout << "Non-compliant cargo." << endl;
+			cout << "ERROR: Non-compliant cargo; over max 737 weight." << endl;
 			total737wt = total737wt - weight;
 		}
 	}
 }
 
 /**
-	Build a Boeing737 unit with parameters passed in
+	Build a Boeing767 unit with parameters passed in
  */
 void load767(vector<Boeing767> &vect767, const string uldType, const string abbrev, const string uldID, const int craft, const double weight, const string destination, int &total767wt)
 {
-	if (abbrev != "AKE" || abbrev != "APE" || abbrev != "AKC" || abbrev != "AQP" || abbrev != "AQF" || abbrev != "AAP" || abbrev != "P1P" || abbrev != "P6P")
-	{
-		cout << "ERROR: Unit type incompatible with 767 aircraft. Unit rejected." << endl;
-	}
-	else
+
+	if (abbrev == "AKE" || abbrev == "APE" || abbrev == "AKC" || abbrev == "AQP" || abbrev == "AQF" || abbrev == "AAP" || abbrev == "P1P" || abbrev == "P6P")
 	{
 		total767wt = total767wt + weight;
 		Boeing767 plane(uldType, abbrev, uldID, craft, weight, destination);
@@ -288,10 +284,13 @@ void load767(vector<Boeing767> &vect767, const string uldType, const string abbr
 		}
 		else
 		{
-			if (DEBUG)
-				cout << "Place in noncomply vector" << endl;
+			cout << "ERROR: Non-compliant cargo; over max 767 weight." << endl;
 			total767wt = total767wt - weight;
 		}
+	}
+	else
+	{
+		cout << "ERROR: Unit type incompatible with 767 aircraft. Unit rejected." << endl;
 	}
 }
 
