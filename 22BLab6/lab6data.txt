@@ -1,0 +1,15 @@
+Pallet     PAG    PAG12345IB   737    5002     SAC
+Container  AYY    AYF40923AA   767    2909     LAS
+Container  AAA    AAA89083DL   767   15932     DFW
+Container  AKE    AKE99324UA   737   11587     SEA
+Container  AKE    AKE99336UA   767   19231     HOU
+Pallet     PLA    PLA79954AA   767   24698     SJC
+Pallet     PMC    PMC56231AA   737    1103     BOI
+Container  AYY    AYY13348UA   767    8005     PDX
+Container  AKC    AKC65221IB   767    9221     BFL
+Container  AQP    AQP32478AA   767   23654     SAN
+Pallet     PMC    PMC92365UA   737    7632     SJC
+Pallet     P6P    P6P42698AA   767   28347     SEA
+
+
+
